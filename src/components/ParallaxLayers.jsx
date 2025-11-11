@@ -1,13 +1,21 @@
+import { memo, useMemo } from 'react'
 import './ParallaxLayers.css'
 
-const ParallaxLayers = ({ scrollY }) => {
+const ParallaxLayers = memo(({ scrollY }) => {
+  // Memoize parallax transforms for better performance
+  const transforms = useMemo(() => ({
+    background: `translateY(${scrollY * 0.1}px)`,
+    midground: `translateY(${scrollY * 0.3}px)`,
+    foreground: `translateY(${scrollY * 0.5}px)`
+  }), [scrollY])
+
   return (
     <div className="parallax-layers">
       {/* Background layer - slowest */}
       <div
         className="parallax-layer layer-background"
         style={{
-          transform: `translateY(${scrollY * 0.1}px)`,
+          transform: transforms.background,
         }}
       >
         <div className="highway-grid"></div>
@@ -24,7 +32,7 @@ const ParallaxLayers = ({ scrollY }) => {
       <div
         className="parallax-layer layer-midground"
         style={{
-          transform: `translateY(${scrollY * 0.3}px)`,
+          transform: transforms.midground,
         }}
       >
         <div className="geometric-float geo-1"></div>
@@ -37,7 +45,7 @@ const ParallaxLayers = ({ scrollY }) => {
       <div
         className="parallax-layer layer-foreground"
         style={{
-          transform: `translateY(${scrollY * 0.5}px)`,
+          transform: transforms.foreground,
         }}
       >
         <div className="tech-element tech-1">
@@ -58,6 +66,8 @@ const ParallaxLayers = ({ scrollY }) => {
       </div>
     </div>
   )
-}
+})
+
+ParallaxLayers.displayName = 'ParallaxLayers'
 
 export default ParallaxLayers

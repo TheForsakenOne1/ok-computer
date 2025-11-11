@@ -23,7 +23,19 @@ An artistic tribute to Radiohead's groundbreaking 1997 album **OK Computer**, fe
 - Smooth **60fps animations** using CSS transforms and GPU acceleration
 - **Intersection Observer API** for scroll-triggered animations
 - **Responsive design** for mobile and desktop
-- Performance-optimized with `will-change` and passive event listeners
+- **Advanced Performance Optimizations**:
+  - RAF (RequestAnimationFrame) throttling for smooth scroll handling
+  - React.memo for component memoization
+  - useMemo for expensive calculations
+  - Lazy loading with React.lazy and Suspense for code splitting
+  - CSS containment for better paint performance
+  - GPU acceleration with transform3d and backface-visibility
+  - Passive event listeners for improved scroll performance
+- **Enhanced UI**:
+  - Custom loading screen with progress animation
+  - Ripple effects on interactive elements
+  - Smooth page transitions
+  - Enhanced focus states for accessibility
 - Accessibility support with `prefers-reduced-motion`
 
 ## Installation
@@ -60,11 +72,30 @@ npm run preview
 
 ## Performance Optimizations
 
-- GPU-accelerated animations using `transform` and `opacity`
-- Passive event listeners for scroll events
-- `will-change` CSS property for animated elements
-- Reduced motion support for accessibility
-- Optimized asset loading
+### React Optimizations
+- **React.memo**: Prevents unnecessary re-renders of Hero and ParallaxLayers components
+- **useMemo**: Memoizes expensive transform calculations for parallax effects
+- **useCallback**: Optimizes scroll handler functions
+- **Lazy Loading**: Code-split sections load on demand, reducing initial bundle size
+- **RAF Throttling**: RequestAnimationFrame-based throttling ensures smooth 60fps scrolling
+
+### CSS Optimizations
+- **GPU Acceleration**: All animations use `transform` and `opacity` for hardware acceleration
+- **CSS Containment**: Layout, style, and paint containment for better rendering performance
+- **will-change**: Applied to frequently animated elements for optimization hints to the browser
+- **Passive Event Listeners**: Scroll events marked as passive for improved performance
+
+### Bundle Optimization
+- **Code Splitting**: Main bundle (150.77 KB) + lazy-loaded chunks per section
+- **Tree Shaking**: Vite automatically removes unused code
+- **CSS Extraction**: Separate CSS chunks for better caching
+
+### Build Size (Production)
+```
+Main Bundle:    150.77 KB (gzipped: 48.40 KB)
+CSS:             16.63 KB (gzipped:  4.05 KB)
+Lazy Chunks:    ~14 KB total (gzipped)
+```
 
 ## Browser Support
 

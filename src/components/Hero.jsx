@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, memo, useMemo } from 'react'
 import './Hero.css'
 
-const Hero = ({ scrollY }) => {
+const Hero = memo(({ scrollY }) => {
   const [isVisible, setIsVisible] = useState(false)
   const heroRef = useRef(null)
 
@@ -9,8 +9,12 @@ const Hero = ({ scrollY }) => {
     setIsVisible(true)
   }, [])
 
-  const opacity = Math.max(1 - scrollY / 800, 0)
-  const scale = Math.max(1 - scrollY / 2000, 0.8)
+  // Memoize expensive calculations
+  const { opacity, scale, translateY } = useMemo(() => ({
+    opacity: Math.max(1 - scrollY / 800, 0),
+    scale: Math.max(1 - scrollY / 2000, 0.8),
+    translateY: scrollY * 0.5
+  }), [scrollY])
 
   return (
     <section className="hero" ref={heroRef}>
@@ -18,7 +22,7 @@ const Hero = ({ scrollY }) => {
         className="hero-content"
         style={{
           opacity,
-          transform: `scale(${scale}) translateY(${scrollY * 0.5}px)`,
+          transform: `scale(${scale}) translateY(${translateY}px)`,
         }}
       >
         <div className={`hero-title ${isVisible ? 'visible' : ''}`}>
@@ -65,6 +69,8 @@ const Hero = ({ scrollY }) => {
       </div>
     </section>
   )
-}
+})
+
+Hero.displayName = 'Hero'
 
 export default Hero
