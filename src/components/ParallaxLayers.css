@@ -1,0 +1,335 @@
+.parallax-layers {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200vh;
+  will-change: transform;
+}
+
+/* Background Layer */
+.layer-background {
+  z-index: 1;
+  opacity: 0.3;
+}
+
+.highway-grid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent,
+    transparent 40px,
+    rgba(59, 154, 156, 0.1) 40px,
+    rgba(59, 154, 156, 0.1) 42px
+  );
+  transform: perspective(400px) rotateX(60deg);
+  transform-origin: bottom;
+}
+
+.cityscape {
+  position: absolute;
+  bottom: 30%;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 0 10%;
+}
+
+.building {
+  background: linear-gradient(
+    to bottom,
+    rgba(26, 77, 109, 0.4),
+    rgba(26, 77, 109, 0.2)
+  );
+  border: 1px solid rgba(59, 154, 156, 0.3);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.building::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 15px,
+    rgba(59, 154, 156, 0.2) 15px,
+    rgba(59, 154, 156, 0.2) 17px
+  );
+}
+
+.building-1 {
+  width: 80px;
+  height: 200px;
+  animation: float 8s ease-in-out infinite;
+}
+
+.building-2 {
+  width: 60px;
+  height: 150px;
+  animation: float 7s ease-in-out infinite 0.5s;
+}
+
+.building-3 {
+  width: 100px;
+  height: 250px;
+  animation: float 9s ease-in-out infinite 1s;
+}
+
+.building-4 {
+  width: 70px;
+  height: 180px;
+  animation: float 7.5s ease-in-out infinite 1.5s;
+}
+
+.building-5 {
+  width: 90px;
+  height: 220px;
+  animation: float 8.5s ease-in-out infinite 2s;
+}
+
+/* Midground Layer */
+.layer-midground {
+  z-index: 2;
+  opacity: 0.5;
+}
+
+.geometric-float {
+  position: absolute;
+  border: 2px solid var(--color-teal);
+  background: rgba(59, 154, 156, 0.05);
+  box-shadow: 0 0 20px rgba(59, 154, 156, 0.3);
+}
+
+.geo-1 {
+  top: 20%;
+  left: 10%;
+  width: 100px;
+  height: 100px;
+  transform: rotate(45deg);
+  animation: float 10s ease-in-out infinite, rotate-slow 20s linear infinite;
+}
+
+.geo-2 {
+  top: 50%;
+  right: 15%;
+  width: 150px;
+  height: 80px;
+  animation: float 12s ease-in-out infinite 1s;
+}
+
+.geo-3 {
+  bottom: 30%;
+  left: 20%;
+  width: 80px;
+  height: 80px;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  animation: float 11s ease-in-out infinite 2s;
+}
+
+.overpass {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-teal),
+    transparent
+  );
+  box-shadow: 0 0 10px rgba(59, 154, 156, 0.5);
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.overpass::before,
+.overpass::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  width: 2px;
+  height: 40px;
+  background: var(--color-teal);
+  box-shadow: 0 0 5px rgba(59, 154, 156, 0.5);
+}
+
+.overpass::before {
+  left: 20%;
+}
+
+.overpass::after {
+  right: 20%;
+}
+
+/* Foreground Layer */
+.layer-foreground {
+  z-index: 3;
+  opacity: 0.7;
+}
+
+.tech-element {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-teal);
+  opacity: 0.6;
+}
+
+.tech-1 {
+  top: 15%;
+  right: 10%;
+  width: 200px;
+  height: 100px;
+  border: 1px solid var(--color-teal);
+  background: rgba(26, 26, 26, 0.5);
+  animation: float 6s ease-in-out infinite;
+}
+
+.scanline-h {
+  width: 100%;
+  height: 2px;
+  background: var(--color-teal);
+  animation: scanline-move 2s linear infinite;
+  box-shadow: 0 0 10px rgba(59, 154, 156, 0.8);
+}
+
+@keyframes scanline-move {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100px);
+  }
+}
+
+.tech-2 {
+  bottom: 30%;
+  left: 5%;
+  animation: float 7s ease-in-out infinite 1s;
+}
+
+.data-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: glitch 2s infinite;
+}
+
+.data-bit {
+  animation: flicker 0.1s infinite;
+}
+
+@keyframes flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.floating-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--color-teal);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(59, 154, 156, 0.8);
+}
+
+.particle-1 {
+  top: 25%;
+  left: 30%;
+  animation: float 8s ease-in-out infinite, drift 15s linear infinite;
+}
+
+.particle-2 {
+  top: 60%;
+  right: 25%;
+  animation: float 9s ease-in-out infinite 1s, drift 18s linear infinite reverse;
+}
+
+.particle-3 {
+  bottom: 40%;
+  left: 60%;
+  animation: float 7s ease-in-out infinite 2s, drift 20s linear infinite;
+}
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(45deg);
+  }
+  to {
+    transform: rotate(405deg);
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(100px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .parallax-layers {
+    opacity: 0.5;
+  }
+
+  .building {
+    width: 40px !important;
+    height: 100px !important;
+  }
+
+  .geometric-float {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .tech-element {
+    font-size: 0.5rem;
+  }
+}
+
+/* Performance optimization */
+@media (prefers-reduced-motion: reduce) {
+  .parallax-layer {
+    transform: none !important;
+  }
+
+  .floating,
+  .pulse-glow,
+  .drift,
+  .rotate-slow {
+    animation: none;
+  }
+}

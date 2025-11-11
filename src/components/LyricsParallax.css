@@ -1,0 +1,204 @@
+.lyrics-parallax {
+  position: relative;
+  min-height: 150vh;
+  padding: 6rem 2rem;
+  background: linear-gradient(180deg, #0f1419 0%, #1a1a1a 50%, #0a0a0a 100%);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.lyrics-header {
+  text-align: center;
+  margin-bottom: 6rem;
+  position: relative;
+  z-index: 2;
+}
+
+.lyrics-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8rem;
+  z-index: 2;
+}
+
+.lyric-layer {
+  position: relative;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease, transform 0.1s linear;
+  will-change: transform, opacity;
+}
+
+.lyric-layer.visible {
+  opacity: 1;
+}
+
+.lyric-content {
+  position: relative;
+  padding: 3rem;
+  background: rgba(26, 26, 26, 0.6);
+  border: 2px solid var(--color-teal);
+  border-left: 4px solid var(--color-teal);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.lyric-content:hover {
+  background: rgba(26, 26, 26, 0.9);
+  border-color: var(--color-accent-yellow);
+  border-left-color: var(--color-accent-yellow);
+  box-shadow:
+    0 0 30px rgba(59, 154, 156, 0.3),
+    inset 0 0 30px rgba(59, 154, 156, 0.1);
+  transform: translateX(10px);
+}
+
+.lyric-number {
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  font-size: 1.5rem;
+  color: var(--color-teal);
+  background: var(--color-gray-dark);
+  padding: 0 10px;
+  letter-spacing: 0.2em;
+}
+
+.lyric-text {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  font-style: italic;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.lyric-subtitle {
+  font-size: 0.9rem;
+  color: var(--color-gray-light);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.lyric-decorative-line {
+  margin-top: 1.5rem;
+  width: 80px;
+  height: 3px;
+  background: var(--color-teal);
+  box-shadow: 0 0 10px rgba(59, 154, 156, 0.6);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.lyrics-ambient-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.ambient-word {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: clamp(3rem, 8vw, 8rem);
+  font-weight: 700;
+  color: var(--color-teal);
+  opacity: 0.03;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.word-1 {
+  top: 10%;
+  left: -5%;
+  transform: rotate(-15deg);
+  animation: float 20s ease-in-out infinite;
+}
+
+.word-2 {
+  top: 30%;
+  right: -10%;
+  transform: rotate(10deg);
+  animation: float 25s ease-in-out infinite 2s;
+}
+
+.word-3 {
+  top: 50%;
+  left: 10%;
+  transform: rotate(-5deg);
+  animation: float 22s ease-in-out infinite 4s;
+}
+
+.word-4 {
+  top: 70%;
+  right: 5%;
+  transform: rotate(8deg);
+  animation: float 28s ease-in-out infinite 6s;
+}
+
+.word-5 {
+  bottom: 10%;
+  left: 20%;
+  transform: rotate(-12deg);
+  animation: float 24s ease-in-out infinite 8s;
+}
+
+.lyrics-footer {
+  text-align: center;
+  margin-top: 6rem;
+  padding: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.lyrics-footer p {
+  font-size: 0.8rem;
+  color: var(--color-gray-light);
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .lyrics-parallax {
+    padding: 4rem 1rem;
+    min-height: 120vh;
+  }
+
+  .lyrics-container {
+    gap: 4rem;
+  }
+
+  .lyric-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .lyric-text {
+    font-size: 1.5rem;
+  }
+
+  .ambient-word {
+    font-size: 3rem;
+  }
+}
+
+/* Performance optimization */
+@media (prefers-reduced-motion: reduce) {
+  .lyric-layer {
+    transform: none !important;
+  }
+
+  .ambient-word {
+    animation: none;
+  }
+}
